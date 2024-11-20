@@ -55,16 +55,15 @@ async function analyzeTextWithPuppeteer(inputText) {
         await page.goto('https://chat.openai.com/chat', { waitUntil: 'networkidle2' });
  
         // Simulate user input and send the request
-        await page.type('textarea[placeholder="Message ChatGPT"]', inputText);
-        await page.click('button[data-testid="fruitjuice-send-button"]');
- 
+        await page.type('div#prompt-textarea', inputText);
+        await page.click('button[data-testid="send-button"]');
         // Wait for and extract the response
-        const responseSelector = 'div[data-message-author-role="assistant"] .markdown.prose';
-        await page.waitForSelector(responseSelector, { timeout: 30000 });
+        const copyBtn = 'button[data-testid="copy-turn-action-button"]';
+        await page.waitForSelector(copyBtn, { timeout: 30000 });
  
         const response = await page.evaluate(() => {
             const responseElement = document.querySelector('div[data-message-author-role="assistant"] .markdown.prose');
-            return responseElement ? responseElement.innerText : 'No response received.';
+            return responseElement ? responseElement.textContent : 'No response received.';
         });
  
         await browser.close();
