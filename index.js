@@ -45,7 +45,6 @@ async function analyzeTextWithPuppeteer(inputText) {
             '--single-process',
             '--disable-gpu'
         ],
-        executablePath: process.env.CHROMIUM_PATH || undefined // Use Render's Chromium or system default
     });
  
     const page = await browser.newPage();
