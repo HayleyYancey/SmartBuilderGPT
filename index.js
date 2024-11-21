@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
 async function analyzeTextWithPuppeteer(inputText) {
     const browser = await puppeteer.launch({
         headless: true,
-        executablePath: process.env.CHROME_BIN || '/usr/bin/chromium-browser', // Use Render's browser path
+        executablePath: process.env.CHROME_BIN || '/usr/bin/google-chrome-stable',
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',

@@ -3,8 +3,12 @@ services:
     name: puppeteer-app
     env: node
     buildCommand: |
-      apt-get update && apt-get install -y chromium-browser
-      which chromium-browser
-      chromium-browser --version
+      apt-get update
+  apt-get install -y wget
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  apt-get install -y ./google-chrome-stable_current_amd64.deb
+  which google-chrome-stable
+  google-chrome-stable --version
     startCommand: node index.js
     runtime: node 18
+  
