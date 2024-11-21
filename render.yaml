@@ -2,9 +2,9 @@ services:
   - type: web
     name: puppeteer-app
     env: node
-    buildCommand: npm install
+    buildCommand: |
+      apt-get update && apt-get install -y chromium-browser
+      which chromium-browser
+      chromium-browser --version
     startCommand: node index.js
     runtime: node 18
-    install:
-      - apt-get update
-      - apt-get install -y chromium-browser
