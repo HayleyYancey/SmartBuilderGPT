@@ -34,18 +34,20 @@ app.post('/', async (req, res) => {
 // Puppeteer function to analyze text
 async function analyzeTextWithPuppeteer(inputText) {
     const browser = await puppeteer.launch({
-        headless: true, // Run in headless mode for servers
+        headless: true,
+        executablePath: process.env.CHROME_BIN || '/usr/bin/chromium-browser', // Use Render's browser path
         args: [
-            '--no-sandbox', // Required for Render
+            '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
             '--single-process',
-            '--disable-gpu'
+            '--disable-gpu',
         ],
     });
+    
  
     const page = await browser.newPage();
  
